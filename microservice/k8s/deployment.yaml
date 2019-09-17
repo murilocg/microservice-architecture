@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: microservice
+  labels:
+    app: microservice
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: microservice
+    spec:
+      containers:
+        - name: microservice
+          image: murilocg/microservice:v1.0
+          imagePullPolicy: Always
+          env:
+            - name: PORT
+              value: '3000'
+          ports:
+            - name: http-microservice
+              containerPort: 3000
